@@ -1,0 +1,35 @@
+{
+  "name": "basic-queue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack serve --node-env development",
+    "build": "webpack --node-env production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keidachird/tm-basic-queue.git"
+  },
+  "author": "Denys Turchyn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keidachird/basic-queue/issues"
+  },
+  "homepage": "https://github.com/keidachird/basic-queue#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.21.4",
+    "autoprefixer": "^10.4.14",
+    "babel-loader": "^9.1.2",
+    "css-loader": "^6.7.3",
+    "cssnano": "^6.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.5",
+    "sass": "^1.62.0",
+    "sass-loader": "^13.2.2",
+    "style-loader": "^3.3.2",
+    "webpack": "^5.79.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.13.2"
+  }
+}
