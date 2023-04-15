@@ -1,36 +1,69 @@
-const inputEl = document.querySelector('.input')
-const queueEl = document.querySelector('.queue')
-const addBtn = document.querySelector('.enqueue')
-const removeBtn = document.querySelector('.dequeue')
+import './styles/main.scss'
 
-let queue = localStorage.getItem('queue')
-  ? localStorage.getItem('queue').split(',')
-  : []
+// DOM elements
+const queueInputEl = document.querySelector('.queue__input')
+const queueListEl = document.querySelector('.queue__list')
+const enqueueBtn = document.querySelector('.btn--enqueue')
+const dequeueBtn = document.querySelector('.btn--dequeue')
 
-console.log(queue)
-if (queue.length) {
-  queueEl.textContent = queue.join(' ')
+// Constants
+const MAX_NODES = 22
+
+// LocalStorage utility
+const setQueueToLocalStorage = queue => {
+  localStorage.setItem('queue', JSON.stringify(queue))
 }
 
-const onAdd = e => {
-  let input = inputEl.value
-  if (input === '') return
+const getQueueFromLocalStorage = () => {
+  if (!localStorage.getItem('queue')) {
+    setQueueToLocalStorage([])
+  }
+  return JSON.parse(localStorage.getItem('queue'))
+}
 
-  inputEl.value = ''
+// DOM manipulation
+const addQueueNode = value => {
+  const node = document.createElement('div')
+  node.classList.add('queue__item')
+  node.textContent = value
+  queueListEl.appendChild(node)
+}
+
+const removeQueueNode = () => {
+  queueListEl.removeChild(queueListEl.firstElementChild)
+}
+
+const renderQueueNodes = queue => {
+  queue.forEach(value => {
+    addQueueNode(value)
+  })
+}
+
+// Event handlers
+const onEnqueue = () => {
+  const input = queueInputEl.value
+  if (input === '' || queue.length >= MAX_NODES) return
+  queueInputEl.value = ''
+
   queue.push(input)
-  localStorage.setItem('queue', queue)
-
-  queueEl.textContent = queue.join(' ')
-
-  console.log(input)
-  console.log(localStorage.getItem('queue'))
+  addQueueNode(input)
+  setQueueToLocalStorage(queue)
 }
 
-const onRemove = e => {
-  queue.shift()
-  localStorage.setItem('queue', queue)
-  queueEl.textContent = queue.join(' ')
+const onDequeue = () => {
+  if (queue.shift()) {
+    setQueueToLocalStorage(queue)
+    removeQueueNode()
+  }
 }
 
-addBtn.addEventListener('click', onAdd)
-removeBtn.addEventListener('click', onRemove)
+// Event listeners
+queueInputEl.addEventListener('keypress', e => {
+  if (e.key === 'Enter') onEnqueue()
+})
+enqueueBtn.addEventListener('click', onEnqueue)
+dequeueBtn.addEventListener('click', onDequeue)
+
+// Rendering queue
+const queue = getQueueFromLocalStorage()
+renderQueueNodes(queue)
