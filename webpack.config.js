@@ -22,7 +22,7 @@ module.exports = {
     },
     open: true,
     hot: true,
-    compress: true,
+    watchFiles: ['*.html'],
   },
   module: {
     rules: [
