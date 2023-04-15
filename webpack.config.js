@@ -2,23 +2,23 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const isProduction = process.env.NODE_ENV === 'production'
+const mode = process.env.NODE_ENV || 'development'
+const isProduction = mode === 'production'
 
 module.exports = {
+  mode,
   entry: {
     bundle: path.resolve(__dirname, 'src/index.js'),
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: isProduction ? '[name][contenthash].js' : '[name].js',
+    filename: isProduction ? '[name].[fullhash].js' : '[name].js',
     clean: true,
   },
-  devtool: isProduction ? false : 'source-map',
+  devtool: 'source-map',
   devServer: {
     static: {
-      directory: isProduction
-        ? path.resolve(__dirname, 'dist')
-        : path.resolve(__dirname, 'src'),
+      directory: path.resolve(__dirname, 'dist'),
     },
     open: true,
     hot: true,
@@ -39,24 +39,22 @@ module.exports = {
       {
         test: /\.(sass|scss|css)$/i,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
-          'style-loader',
+          // If use MiniCssExtractPlugin then remove 'style-loader'
+          MiniCssExtractPlugin.loader,
           'css-loader',
-          'sass-loader',
           'postcss-loader',
+          'sass-loader',
         ],
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: 'index.html',
       template: 'index.html',
+      inject: 'body',
     }),
     new MiniCssExtractPlugin({
-      filename: isProduction ? '[name][contenthash].css' : '[name].css',
+      filename: isProduction ? '[name].[fullhash].css' : '[name].css',
     }),
   ],
 }
