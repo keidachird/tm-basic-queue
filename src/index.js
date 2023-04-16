@@ -22,6 +22,8 @@ const getQueueFromLocalStorage = () => {
   return queue
 }
 
+const queue = getQueueFromLocalStorage()
+
 // DOM manipulation
 const addQueueNode = value => {
   const node = document.createElement('li')
@@ -81,8 +83,6 @@ enqueueBtn.addEventListener('click', handleEnqueue)
 dequeueBtn.addEventListener('click', handleDequeue)
 
 // Rendering queue
-const queue = getQueueFromLocalStorage()
 enqueueBtn.disabled = true
 dequeueBtn.disabled = !queue.length
-
 renderQueueNodes(queue)
