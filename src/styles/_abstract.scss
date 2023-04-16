@@ -1,0 +1,25 @@
+:root {
+  --white: #fff;
+  --black: #101820;
+  --green: #007672;
+  --green-tint: #1a8480;
+  --red: #ba0040;
+
+  --black-shadow: #10182030;
+  --white-transparent: #ffffff30;
+  --gray-disabled: #10101030;
+}
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 37.5em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab-port {
+    @media only screen and (max-width: 56.25em) {
+      @content;
+    }
+  }
+}
