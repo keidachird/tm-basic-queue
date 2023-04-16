@@ -1,10 +1,12 @@
 import './styles/main.scss'
 
 // DOM elements
-const queueInputEl = document.querySelector('.queue__input')
-const queueListEl = document.querySelector('.queue__list')
-const enqueueBtn = document.querySelector('.btn--enqueue')
-const dequeueBtn = document.querySelector('.btn--dequeue')
+const [queueInputEl, queueListEl, enqueueBtn, dequeueBtn] = [
+  '.queue__input',
+  '.queue__list',
+  '.btn--enqueue',
+  '.btn--dequeue',
+].map(selector => document.querySelector(selector))
 
 // Constants
 const MAX_NODES = 22
@@ -15,10 +17,9 @@ const setQueueToLocalStorage = queue => {
 }
 
 const getQueueFromLocalStorage = () => {
-  if (!localStorage.getItem('queue')) {
-    setQueueToLocalStorage([])
-  }
-  return JSON.parse(localStorage.getItem('queue'))
+  const queue = JSON.parse(localStorage.getItem('queue') ?? '[]')
+  setQueueToLocalStorage(queue)
+  return queue
 }
 
 // DOM manipulation
@@ -30,23 +31,16 @@ const addQueueNode = value => {
 }
 
 const removeQueueNode = () => {
-  queueListEl.removeChild(queueListEl.firstElementChild)
+  queueListEl.firstElementChild?.remove()
 }
 
 const renderQueueNodes = queue => {
-  queue.forEach(value => {
-    addQueueNode(value)
-  })
+  queue.forEach(addQueueNode)
 }
 
 // Event handlers
-const onEnqueue = () => {
+const handleEnqueue = () => {
   const input = queueInputEl.value
-
-  if (input === '' || queue.length >= MAX_NODES) {
-    enqueueBtn.disabled = true
-    return
-  }
 
   queueInputEl.value = ''
   queueInputEl.focus()
@@ -58,7 +52,7 @@ const onEnqueue = () => {
   setQueueToLocalStorage(queue)
 }
 
-const onDequeue = () => {
+const handleDequeue = () => {
   if (queue.shift()) {
     setQueueToLocalStorage(queue)
     removeQueueNode()
@@ -70,18 +64,21 @@ const onDequeue = () => {
     after entering value in input and removing element from queue
     the 'Add' button still remains disabled despite there is some text in input
   */
-  enqueueBtn.disabled = queueInputEl.value === ''
+  enqueueBtn.disabled = !queueInputEl.value
 }
+
+// Helper functions
+const isValidInput = () => queueInputEl.value !== '' && queue.length < MAX_NODES
 
 // Event listeners
 queueInputEl.addEventListener('keypress', e => {
-  if (e.key === 'Enter') onEnqueue()
+  if (e.key === 'Enter' && isValidInput()) handleEnqueue()
 })
-queueInputEl.addEventListener('input', e => {
-  enqueueBtn.disabled = e.target.value === '' || queue.length >= MAX_NODES
+queueInputEl.addEventListener('input', () => {
+  enqueueBtn.disabled = !isValidInput()
 })
-enqueueBtn.addEventListener('click', onEnqueue)
-dequeueBtn.addEventListener('click', onDequeue)
+enqueueBtn.addEventListener('click', handleEnqueue)
+dequeueBtn.addEventListener('click', handleDequeue)
 
 // Rendering queue
 const queue = getQueueFromLocalStorage()
