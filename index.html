@@ -13,9 +13,11 @@
   <div class="container">
     <div class="queue">
       <div class="queue__management">
-        <input class="queue__input" type="number" step="1">
-        <button class="btn--enqueue btn">Add</button>
-        <button class="btn--dequeue btn">Remove</button>
+        <input class="queue__input" type="number" step="1" placeholder="Enter a number...">
+        <div class="queue__buttons">
+          <button class="btn--dequeue btn">Dequeue</button>
+          <button class="btn--enqueue btn">Enqueue</button>
+        </div>
       </div>
 
       <ul class="queue__list">
