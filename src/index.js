@@ -23,7 +23,7 @@ const getQueueFromLocalStorage = () => {
 
 // DOM manipulation
 const addQueueNode = value => {
-  const node = document.createElement('div')
+  const node = document.createElement('li')
   node.classList.add('queue__item')
   node.textContent = value
   queueListEl.appendChild(node)
