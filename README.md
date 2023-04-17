@@ -18,7 +18,7 @@ Page has an input field, two buttons for adding and removing element and the are
 
 Here is a demostration how to use this application:
 
-![Application usage example](https://i.ibb.co/NmDbRb6/basic-queue-demo.gif)
+![Application usage example](https://i.ibb.co/GcZm3K2/basic-queue-demo.gif)
 
 ## Notes
 
