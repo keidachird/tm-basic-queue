@@ -26,3 +26,4 @@ Here is a demostration how to use this application:
 - Maximum elements of the queue equals `22` due to a task requirements.
 - Instead of notifying user about impossible actions application just prohibits to do them by making needed button disabled.
 - State of the queue is saved through page reloads.
+- A UI is adaptive for all screen sizes.
