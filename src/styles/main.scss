@@ -56,17 +56,15 @@ body {
 }
 
 .queue {
-  height: 100vh;
   padding: 2rem;
 
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   gap: 2rem;
 
   &__management {
-    flex: 1;
     padding: 2rem;
     border-radius: 2rem;
     box-shadow: 0 0 2rem 1rem var(--black-shadow);
@@ -80,7 +78,7 @@ body {
   }
 
   &__input {
-    width: 20rem;
+    max-width: 20rem;
     padding: 0.8rem 0 0.8rem 2.4rem;
     border: none;
     border-radius: 1rem;
@@ -105,8 +103,7 @@ body {
   }
 
   &__list {
-    height: 75vh;
-    width: 80rem;
+    width: 80%;
     padding: 3rem;
     border-radius: 2rem;
     box-shadow: 0 0 2rem 1rem var(--black-shadow);
@@ -114,29 +111,17 @@ body {
     background-color: var(--white-transparent);
 
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
     gap: 3rem;
+    align-content: center;
+    justify-content: center;
     align-items: center;
     justify-items: center;
-
-    @include respond(tab-port) {
-      height: 85vh;
-      width: 90%;
-
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(6, 1fr);
-    }
-
-    @include respond(phone) {
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(8, 1fr);
-    }
   }
 
   &__item {
-    width: 100%;
-    height: 100%;
+    width: 10rem;
+    height: 10rem;
     border-radius: 2rem;
     box-shadow: inset 0 0 3rem 2rem var(--white-transparent);
 
