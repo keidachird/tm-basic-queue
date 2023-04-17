@@ -6,9 +6,10 @@ This repository contains a visualisation of a basic queue data structure. It was
 
 You can see a live demo of this project [here](https://keidachird.github.io/tm-basic-queue/).
 
-## Instalation
+## Installation
 
 - Clone this repository with `git clone https://github.com/keidachird/tm-basic-queue.git`.
+- Open a cloned directory with `cd tm-basic-queue`.
 - Run `npm i` to install all dependencies.
 - Run `npm run dev` to launch a server. It will open a browser and you can use the application.
 
