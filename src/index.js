@@ -52,6 +52,9 @@ const handleEnqueue = () => {
   queue.push(input)
   addQueueNode(input)
   setQueueToLocalStorage(queue)
+
+  queue.length >= MAX_NODES &&
+    alert(`You've reached a limit of elements in the queue!`)
 }
 
 const handleDequeue = () => {
