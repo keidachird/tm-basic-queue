@@ -123,12 +123,18 @@ body {
     width: 10rem;
     height: 10rem;
     border-radius: 2rem;
-    box-shadow: inset 0 0 3rem 2rem var(--white-transparent);
+    box-shadow: inset 0 0 2rem 2rem var(--white-transparent);
 
     background-color: var(--white-transparent);
 
     display: flex;
     justify-content: center;
     align-items: center;
+
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      translate: 0 -1rem;
+      box-shadow: inset 0 0 2rem 1rem var(--white-transparent);
+    }
   }
 }
