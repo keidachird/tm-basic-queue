@@ -2,6 +2,12 @@
 
 This repository contains a visualisation of a basic queue data structure. It was made as a homework for [Techmagic Academy](https://www.techmagic.co/techmagic-academy).
 
+---
+
+## PART 2 OF JS HOMEWORK IS [HERE](https://github.com/keidachird/tm-entities-interactions)
+
+---
+
 ## Demo
 
 You can see a live demo of this project [here](https://keidachird.github.io/tm-basic-queue/).
